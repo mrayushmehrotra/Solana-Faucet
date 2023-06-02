@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>AirDrop Solana</title>
+    
+</head>
+<body>
+    <form>
+        <label for="inputText" class="name">Enter Sol Wallet Address:</label>
+        <input type="text" id="inputText" name="inputText"><br>
+        <img id="icon" src="https://upload.wikimedia.org/wikipedia/en/b/b9/Solana_logo.png" onclick="submitForm()">
+        
+    </form>
+    <div class="cursor"></div>
+
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+ 
+    <script>
+        const {Connection, PublicKey} = solanaWeb3;
+    </script>
+
+    <script>
+        function submitForm(){
+            var solanaPublicKey = document.getElementById("inputText").value;
+
+            const connection = new Connection("https://api.devnet.solana.com");
+
+            let publicKeyObject = new PublicKey(solanaPublicKey)
+
+            const fn = (async ()=>{
+                let txhash = await connection.requestAirdrop(publicKeyObject, 1e9);
+                
+                console.log(`txhash: ${txhash}`);
+
+                const inputText = document.getElementById("inputText").value;
+                alert("SENT TO: " + inputText);
+                document.write(` transaction hash: ${txhash}`)
+
+            });
+            fn();
+        }
+    </script>
+    
+ 
+<script src="index.js"></script>
+<footer>
+    This is made by Ayush Mehrotra
+</footer>
+</body>
+</html>
