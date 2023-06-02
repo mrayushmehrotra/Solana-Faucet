@@ -83,3 +83,7 @@ transform: scale(1);
         opacity: 0.5;
     }
 }
+
+.note {
+color:red;
+}
